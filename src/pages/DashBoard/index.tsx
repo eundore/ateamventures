@@ -1,21 +1,35 @@
 import styled from "styled-components";
+import Filtering from "../../components/Filtering";
 import MainContent from "../../components/MainContent";
 import Toggle from "../../components/Toggle";
 
 export default function DashBoard() {
   return (
-    <>
-      <TopFrame>
-        <Title>들어온 요청</Title>
-        <SubTitle>파트너님에게 딱 맞는 요청서를 찾아보세요.</SubTitle>
-      </TopFrame>
-      <MainContent />
-      <Toggle />
-    </>
+    <Container>
+      <Wrapper>
+        <TitleContainer>
+          <Title>들어온 요청</Title>
+          <SubTitle>파트너님에게 딱 맞는 요청서를 찾아보세요.</SubTitle>
+        </TitleContainer>
+        <MainContent />
+        <Filtering />
+        <Toggle />
+      </Wrapper>
+    </Container>
   );
 }
 
-const TopFrame = styled.div`
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Wrapper = styled.div`
+  position: relative;
+  width: 1440px;
+`;
+
+const TitleContainer = styled.div`
   position: absolute;
   width: 284px;
   height: 56px;

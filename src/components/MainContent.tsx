@@ -15,10 +15,8 @@ export default function MainContent() {
 }
 
 const CardsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 
   position: absolute;
   width: 1130.01px;

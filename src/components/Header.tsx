@@ -4,23 +4,22 @@ import styled from "styled-components";
 
 export default function Header() {
   return (
-    <Root>
+    <Container>
       <Logo src={logo} />
-      <RightFrame>
+      <RightSideContatiner>
         <CompanyInfo>
           <CompanyIcon src={icon} />
           <CompanyName>A 가공 업체</CompanyName>
         </CompanyInfo>
         <Divider />
         <Logout>로그아웃</Logout>
-      </RightFrame>
-    </Root>
+      </RightSideContatiner>
+    </Container>
   );
 }
 
-const Root = styled.header`
+const Container = styled.header`
   position: absolute;
-  min-width: 1440px;
   height: 70px;
 
   position: absolute;
@@ -40,7 +39,7 @@ const Logo = styled.img`
   bottom: 35.71%;
 `;
 
-const RightFrame = styled.div`
+const RightSideContatiner = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
