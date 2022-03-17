@@ -1,17 +1,26 @@
+import { useState, useEffect, ReactElement } from "react";
 import styled from "styled-components";
 import Card from "./Card";
+import { EstimateRequestCard } from "../utils/CommonInterface";
+import getEstimateRequestCardList from "../api/getEstimateRequestCardList";
 
 export default function MainContent() {
-  return (
-    <CardsWrapper>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-    </CardsWrapper>
-  );
+  const [cardList, setCardList] = useState<Array<EstimateRequestCard>>([]);
+  let li: Array<ReactElement> = [];
+
+  cardList.map((data) => {
+    li.push(<Card estimateRequestData={data}></Card>);
+  });
+
+  useEffect(() => {
+    getEstimateRequestCardList()
+      .then((res) => res.json())
+      .then((data) => {
+        setCardList((arr) => [...data]);
+      });
+  }, []);
+
+  return <CardsWrapper>{li}</CardsWrapper>;
 }
 
 const CardsWrapper = styled.div`

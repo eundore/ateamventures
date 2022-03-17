@@ -12,10 +12,10 @@ export default function MobileHeaderMenu() {
 }
 
 const Container = styled.div`
-  z-index: 2;
+  z-index: 3;
   position: absolute;
   width: 280px;
-  height: 100%;
+  height: 100vh;
   left: 0px;
   top: 0px;
   background: #ffffff;

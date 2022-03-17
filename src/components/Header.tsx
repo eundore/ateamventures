@@ -53,7 +53,8 @@ export default function Header() {
         </AppBar>
       </Box>
 
-      <MobileHeaderMenu />
+      {/* <Overlay />
+      <MobileHeaderMenu /> */}
     </>
   );
 }
@@ -132,4 +133,15 @@ const Logout = styled.div`
   order: 2;
   flex-grow: 0;
   margin: 0px 16px;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  z-index: 2;
+  background: #323d45;
+  opacity: 0.5;
 `;

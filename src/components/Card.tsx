@@ -1,38 +1,46 @@
 import styled from "styled-components";
+import { EstimateRequestCard } from "../utils/CommonInterface";
 
-export default function Card() {
+export default function Card(props: {
+  estimateRequestData: EstimateRequestCard;
+}) {
+  const { estimateRequestData } = props;
+
   return (
-    <Container>
+    <Container key={estimateRequestData.id}>
       <TitleContainer>
-        <MainTitle>자동차 시제품 제작</MainTitle>
-        <SubTitle>A 고객사</SubTitle>
-        <DateContainer>2020.12.14까지 납기</DateContainer>
+        <MainTitle>{estimateRequestData.title}</MainTitle>
+        <SubTitle>{estimateRequestData.client}</SubTitle>
+        <DateContainer>{estimateRequestData.due}까지 납기</DateContainer>
         <Divider />
       </TitleContainer>
       <ListContainer>
         <ListRow>
           <ListTitle>도면 개수</ListTitle>
-          <ListContent>2개</ListContent>
+          <ListContent>{estimateRequestData.count}</ListContent>
         </ListRow>
         <ListRow>
-          <ListTitle>도면 개수</ListTitle>
-          <ListContent>2개</ListContent>
+          <ListTitle>총 수량</ListTitle>
+          <ListContent>{estimateRequestData.amount}</ListContent>
         </ListRow>
         <ListRow>
-          <ListTitle>도면 개수</ListTitle>
-          <ListContent>2개</ListContent>
+          <ListTitle>가공방식</ListTitle>
+          <ListContent>{estimateRequestData.method.join()}</ListContent>
         </ListRow>
         <ListRow>
-          <ListTitle>도면 개수</ListTitle>
-          <ListContent>2개</ListContent>
+          <ListTitle>재료</ListTitle>
+          <ListContent>{estimateRequestData.material.join()}</ListContent>
         </ListRow>
       </ListContainer>
       <ButtonsContainer>
         <ViewButton>요청 내역 보기</ViewButton>
         <ChatButton>채팅하기</ChatButton>
       </ButtonsContainer>
-
-      <StatusBadge>상담중</StatusBadge>
+      {estimateRequestData.status === "상담중" ? (
+        <StatusBadge>상담중</StatusBadge>
+      ) : (
+        ""
+      )}
     </Container>
   );
 }
