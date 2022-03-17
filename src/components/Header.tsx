@@ -1,42 +1,71 @@
-import logo from "../assets/logo.png";
-import icon from "../assets/icon.png";
 import styled from "styled-components";
+import logo from "../assets/logo.png";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import BusinessIcon from "@mui/icons-material/Business";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import MobileHeaderMenu from "./MobileHeaderMenu";
 
 export default function Header() {
+  const isMobile = useMediaQuery("(max-width: 600px)");
   return (
-    <Container>
-      <Logo src={logo} />
-      <RightSideContatiner>
-        <CompanyInfo>
-          <CompanyIcon src={icon} />
-          <CompanyName>A 가공 업체</CompanyName>
-        </CompanyInfo>
-        <Divider />
-        <Logout>로그아웃</Logout>
-      </RightSideContatiner>
-    </Container>
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar
+            sx={{
+              minWidth: `${isMobile ? "0px" : "1300px"}`,
+              minHeight: `${isMobile ? "44px" : "70px"}`,
+              backgroundColor: "#1565C0",
+            }}
+          >
+            {isMobile ? (
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
+            ) : (
+              ""
+            )}
+
+            <Logo src={logo} />
+            {isMobile ? (
+              ""
+            ) : (
+              <RightSideContatiner>
+                <CompanyInfo>
+                  <BusinessIcon sx={{ color: "#ffffff" }} />
+                  <CompanyName>A 가공 업체</CompanyName>
+                </CompanyInfo>
+                <Divider />
+                <Logout>로그아웃</Logout>
+              </RightSideContatiner>
+            )}
+          </Toolbar>
+        </AppBar>
+      </Box>
+
+      <MobileHeaderMenu />
+    </>
   );
 }
 
-const Container = styled.header`
-  position: absolute;
-  height: 70px;
-
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  background: #1565c0;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
-`;
-
 const Logo = styled.img`
-  position: absolute;
-  left: 2.78%;
-  right: 86.6%;
-  top: 35.71%;
-  bottom: 35.71%;
+  height: 20px;
+  width: 153px;
+
+  @media only screen and (max-width: 600px) {
+    height: 12px;
+    width: 91.8px;
+  }
 `;
 
 const RightSideContatiner = styled.div`
@@ -52,44 +81,25 @@ const RightSideContatiner = styled.div`
 
 const CompanyInfo = styled.div`
   position: static;
-  width: 91.67px;
+  width: 93.67px;
   height: 20px;
   left: 0px;
   top: 0px;
 
-  flex: none;
-  order: 0;
-  flex-grow: 0;
   margin: 0px 16px;
+  display: flex;
+  align-items: flex-end;
 `;
 
-const CompanyIcon = styled.img`
-  height: 15px;
-  width: 16.666667938232422px;
-
-  position: absolute;
-  left: 0%;
-  right: 92.01%;
-  top: 12.5%;
-  bottom: 12.5%;
-`;
-
-const CompanyName = styled.div`
-  position: absolute;
-  left: 11.82%;
-  right: 56.07%;
-  top: 0%;
-  bottom: 0%;
-
+const CompanyName = styled.span`
   font-family: "Noto Sans KR Medium";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
 
-  display: flex;
-  align-items: center;
   color: #ffffff;
+  margin-left: 5px;
 `;
 const Divider = styled.hr`
   height: 16px;

@@ -57,6 +57,12 @@ const Container = styled.div`
   &:hover {
     border: 2px solid rgba(33, 150, 243, 1);
   }
+
+  @media only screen and (max-width: 600px) {
+    width: 320px;
+    height: 344px;
+    row-gap: 16px;
+  }
 `;
 
 const TitleContainer = styled.div``;
@@ -122,6 +128,10 @@ const Divider = styled.div`
   width: 334px;
   border: 1px solid #e5e5e5;
   margin-top: 16px;
+
+  @media only screen and (max-width: 600px) {
+    width: 288px;
+  }
 `;
 
 const ListContainer = styled.div`
@@ -177,6 +187,10 @@ const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
   column-gap: 10px;
+
+  @media only screen and (max-width: 600px) {
+    margin-top: 16px;
+  }
 `;
 
 const ViewButton = styled.div`

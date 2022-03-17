@@ -1,90 +1,113 @@
 import styled from "styled-components";
-import arrow from "../assets/arrow.png";
+import CheckBoxGroup from "./CheckBoxGroup";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 export default function Filtering() {
   return (
     <Contatiner>
       <SelectBoxWrapper>
         <SelectText>가공방식</SelectText>
-        <SelectIcon src={arrow} />
+        <ArrowDropDownIcon sx={{ color: "#939FA5" }} />
+        {/* <CheckBoxContainer>
+          <CheckBoxGroup />
+        </CheckBoxContainer> */}
       </SelectBoxWrapper>
+
       <SelectBoxWrapper>
         <SelectText>재료</SelectText>
-        <SelectIcon src={arrow} />
+        <ArrowDropDownIcon sx={{ color: "#939FA5" }} />
+        {/* <CheckBoxContainer>
+          <CheckBoxGroup />
+        </CheckBoxContainer> */}
       </SelectBoxWrapper>
+
+      <RefreshContainer>
+        <RefreshIcon sx={{ color: "#2196F3" }} />
+        <RefreshText>필터링 리셋</RefreshText>
+      </RefreshContainer>
     </Contatiner>
   );
 }
 
 const Contatiner = styled.div`
   position: absolute;
-  width: 193px;
+  width: 311px;
   height: 32px;
   left: 155px;
-  top: 198px;
+  top: 134px;
 
   display: flex;
   column-gap: 11px;
+
+  @media only screen and (max-width: 600px) {
+    left: 20px;
+    top: 156px;
+  }
 `;
 
 const SelectBoxWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  padding: 4px 12px;
+  padding: 4px 8px;
 
   width: 98px;
   height: 32px;
-  left: 155px;
-  top: 198px;
 
   background: #ffffff;
 
   border: 1px solid #939fa5;
   box-sizing: border-box;
   border-radius: 4px;
+
+  &:hover {
+    border: 1px solid rgba(33, 150, 243, 1);
+    cusor: pointer;
+  }
+
+  position: relative;
 `;
 
-const SelectText = styled.text`
-  position: static;
-  height: 14px;
-  left: 12.24%;
-  right: 41.84%;
-  top: calc(50% - 14px / 2);
-
+const SelectText = styled.div`
   font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 14px;
-  /* identical to box height */
-
-  display: flex;
-  align-items: center;
-
-  /* Gray / 900 (default) */
-
   color: #323d45;
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 0px 5px;
 `;
 
-const SelectIcon = styled.img`
-  position: static;
-  width: 24px;
-  height: 24px;
-  left: 62px;
-  top: 4px;
+const CheckBoxContainer = styled.div`
+  position: absolute;
+  top: 35px;
+  left: 0px;
+  z-index: 1;
 
-  /* Inside auto layout */
+  background: #ffffff;
 
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-  margin: 0px 5px;
+  border: 1px solid #939fa5;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  padding: 10px;
+  width: 130px;
+`;
+
+const RefreshContainer = styled.div`
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+  margin-left: 8px;
+`;
+
+const RefreshText = styled.div`
+  font-family: "Noto Sans KR Regular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+
+  color: #2196f3;
 `;
