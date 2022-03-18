@@ -17,6 +17,7 @@ export default function Filtering() {
     useState<filterOption>();
 
   const checkedList = useAppSelector((state) => state.filtering.list);
+  const toggle = useAppSelector((state) => state.filtering.toggle);
   const dispatch = useAppDispatch();
 
   const setSelected = (
@@ -127,10 +128,14 @@ export default function Filtering() {
         </CheckBoxContainer>
       </FilterContainer>
 
-      <RefreshContainer onClick={handleRefresh}>
-        <RefreshIcon sx={{ color: "#2196F3" }} />
-        <RefreshText>필터링 리셋</RefreshText>
-      </RefreshContainer>
+      {checkedList.length || toggle ? (
+        <RefreshContainer onClick={handleRefresh}>
+          <RefreshIcon sx={{ color: "#2196F3" }} />
+          <RefreshText>필터링 리셋</RefreshText>
+        </RefreshContainer>
+      ) : (
+        ""
+      )}
     </Container>
   );
 }

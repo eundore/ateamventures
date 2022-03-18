@@ -13,12 +13,16 @@ export default function Header() {
   const isMobile = useMediaQuery("(max-width: 600px)");
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box
+        sx={{
+          flexGrow: 1,
+          minWidth: `${isMobile ? "0px" : "1300px"}`,
+          minHeight: `${isMobile ? "44px" : "70px"}`,
+        }}
+      >
         <AppBar position="static">
           <Toolbar
             sx={{
-              minWidth: `${isMobile ? "0px" : "1300px"}`,
-              minHeight: `${isMobile ? "44px" : "70px"}`,
               backgroundColor: "#1565C0",
             }}
           >
