@@ -8,9 +8,19 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import MobileHeaderMenu from "./MobileHeaderMenu";
+import { useEffect, useRef, useState } from "react";
 
 export default function Header() {
   const isMobile = useMediaQuery("(max-width: 600px)");
+
+  const [open, setOpen] = useState<boolean>(false);
+  const target = useRef<HTMLElement>(null);
+
+  const handleHeaderMenu = () => {
+    setOpen(true);
+    document.body.style.overflow = "hidden";
+  };
+
   return (
     <>
       <Box
@@ -33,6 +43,7 @@ export default function Header() {
                 color="inherit"
                 aria-label="menu"
                 sx={{ mr: 2 }}
+                onClick={handleHeaderMenu}
               >
                 <MenuIcon />
               </IconButton>
@@ -57,8 +68,14 @@ export default function Header() {
         </AppBar>
       </Box>
 
-      {/* <Overlay />
-      <MobileHeaderMenu /> */}
+      {open ? (
+        <>
+          <Overlay />
+          <MobileHeaderMenu checked={open} />
+        </>
+      ) : (
+        ""
+      )}
     </>
   );
 }

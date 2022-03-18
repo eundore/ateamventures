@@ -1,13 +1,72 @@
+import { makeStyles, createStyles } from "@mui/styles";
+import {
+  Slide,
+  Divider,
+  ListItemIcon,
+  ListItemText,
+  MenuItem,
+  MenuList,
+} from "@mui/material";
+import BusinessIcon from "@mui/icons-material/Business";
 import styled from "styled-components";
 import logoMobileMenu from "../assets/logoMobileMenu.png";
+import { useEffect, useRef } from "react";
 
-export default function MobileHeaderMenu() {
+const menuItemStyles = makeStyles(() =>
+  createStyles({
+    text: {
+      fontFamily: "Noto Sans KR Medium",
+      fontSize: "14px",
+      lineHeight: "20px",
+      color: "#323D45",
+    },
+  })
+);
+
+export default function MobileHeaderMenu(props: { checked: boolean }) {
+  const { checked } = props;
+  const classes = menuItemStyles();
+
+  const target = useRef<HTMLDivElement>(null);
+
+  const handleOutsideClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent
+  ) => {
+    if (event.target === target.current) {
+    }
+    // if (!target.current || target.current.contains(event.target)) {
+    //   return;
+    // }
+  };
+
+  useEffect(() => {
+    if (checked) {
+      document.addEventListener("click", handleOutsideClick);
+    } else {
+      document.removeEventListener("click", handleOutsideClick);
+    }
+  }, [checked]);
+
   return (
-    <Container>
-      <Title>
-        <Logo src={logoMobileMenu} />
-      </Title>
-    </Container>
+    <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
+      <Container ref={target}>
+        <Title>
+          <Logo src={logoMobileMenu} />
+        </Title>
+        <Divider />
+        <MenuList>
+          <MenuItem>
+            <ListItemIcon>
+              <BusinessIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText className={classes.text}>파트너정밀가공</ListItemText>
+          </MenuItem>
+          <MenuItem>
+            <ListItemText className={classes.text}>로그아웃</ListItemText>
+          </MenuItem>
+        </MenuList>
+      </Container>
+    </Slide>
   );
 }
 

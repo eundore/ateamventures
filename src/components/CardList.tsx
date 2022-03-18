@@ -30,7 +30,7 @@ export default function CardList() {
     setIsEmpty(false);
 
     //선택된 필터가 없고 토글 활성화가 안 되어 있을 때 기존 요청 카드 리스트로 값 설정.
-    if (checkedList.length === 0 && toggle === false) {
+    if (checkedList.length === 0 && !toggle) {
       dispatch(setcardList([...originCardList]));
       return;
     }
