@@ -7,7 +7,7 @@ export default function Card(props: {
   const { estimateRequestData } = props;
 
   return (
-    <Container key={estimateRequestData.id}>
+    <Container>
       <TitleContainer>
         <MainTitle>{estimateRequestData.title}</MainTitle>
         <SubTitle>{estimateRequestData.client}</SubTitle>

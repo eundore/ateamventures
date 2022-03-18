@@ -2,10 +2,26 @@ import styled from "styled-components";
 import { alpha, styled as muiStyled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../app/hook";
+import setFilteringResetFlag from "../features/filteringSlice";
+import { useEffect } from "react";
 
 export default function Toggle() {
-  const isMobile = useMediaQuery("(max-width: 600px)");
+  const filteringResetFlag = useAppSelector(
+    (state) => state.filtering.filteringResetFlag
+  );
+
+  const dispatch = useAppDispatch();
+
+  const [checked, setChecked] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (filteringResetFlag) {
+      setChecked(false);
+      dispatch(setFilteringResetFlag());
+    }
+  }, [filteringResetFlag]);
 
   const CustomSwitch = muiStyled(Switch)(({ theme }) => ({
     "& .MuiSwitch-switchBase.Mui-checked": {
@@ -22,7 +38,7 @@ export default function Toggle() {
   return (
     <Container>
       <FormControlLabel
-        control={<CustomSwitch name="consultState" />}
+        control={<CustomSwitch name="consultState" checked={checked} />}
         label={<Label>상담 중인 요청만 보기</Label>}
       />
     </Container>

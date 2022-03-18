@@ -11,3 +11,7 @@ export interface EstimateRequestCard {
   material: Array<string>;
   status: Status;
 }
+export interface filterOption {
+  processMethod: Array<string>;
+  material: Array<string>;
+}

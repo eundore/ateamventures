@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Filtering from "../../components/Filtering";
-import MainContent from "../../components/MainContent";
+import CardList from "../../components/CardList";
 import Toggle from "../../components/Toggle";
 
 export default function DashBoard() {
@@ -13,7 +13,7 @@ export default function DashBoard() {
         </TitleContainer>
         <Filtering />
         <Toggle />
-        <MainContent />
+        <CardList />
       </Wrapper>
     </Container>
   );

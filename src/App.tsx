@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router";
 import Header from "./components/Header";
 import DashBoard from "./pages/DashBoard";
