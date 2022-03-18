@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface checkedListState {
   list: Array<string>;
-  filteringResetFlag: boolean;
+  toggle: boolean;
 }
 
 const initialState: checkedListState = {
   list: [],
-  filteringResetFlag: false,
+  toggle: false,
 };
 
 export const filteringSlice = createSlice({
@@ -25,8 +25,8 @@ export const filteringSlice = createSlice({
     resetCheckedList: (state) => {
       state.list = [];
     },
-    setFilteringResetFlag: (state, action: PayloadAction<boolean>) => {
-      state.filteringResetFlag = action.payload;
+    setToggleFlag: (state, action: PayloadAction<boolean>) => {
+      state.toggle = action.payload;
     },
   },
 });
@@ -35,7 +35,7 @@ export const {
   addCheckedOption,
   delCheckedOption,
   resetCheckedList,
-  setFilteringResetFlag,
+  setToggleFlag,
 } = filteringSlice.actions;
 
 export default filteringSlice.reducer;

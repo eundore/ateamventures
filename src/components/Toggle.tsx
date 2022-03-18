@@ -2,26 +2,16 @@ import styled from "styled-components";
 import { alpha, styled as muiStyled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hook";
-import setFilteringResetFlag from "../features/filteringSlice";
-import { useEffect } from "react";
+import { setToggleFlag } from "../features/filteringSlice";
 
 export default function Toggle() {
-  const filteringResetFlag = useAppSelector(
-    (state) => state.filtering.filteringResetFlag
-  );
-
+  const toggle = useAppSelector((state) => state.filtering.toggle);
   const dispatch = useAppDispatch();
 
-  const [checked, setChecked] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (filteringResetFlag) {
-      setChecked(false);
-      dispatch(setFilteringResetFlag());
-    }
-  }, [filteringResetFlag]);
+  const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setToggleFlag(event.target.checked));
+  };
 
   const CustomSwitch = muiStyled(Switch)(({ theme }) => ({
     "& .MuiSwitch-switchBase.Mui-checked": {
@@ -38,7 +28,13 @@ export default function Toggle() {
   return (
     <Container>
       <FormControlLabel
-        control={<CustomSwitch name="consultState" checked={checked} />}
+        control={
+          <CustomSwitch
+            name="consultState"
+            checked={toggle}
+            onChange={handleToggle}
+          />
+        }
         label={<Label>상담 중인 요청만 보기</Label>}
       />
     </Container>

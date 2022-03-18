@@ -5,8 +5,9 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import { useEffect, useState } from "react";
 import getFilterOptionList from "../api/getFilterOptionList";
 import { filterOption } from "../utils/CommonInterface";
-import { useAppDispatch } from "../app/hook";
+import { useAppDispatch, useAppSelector } from "../app/hook";
 import { resetCheckedList } from "../features/filteringSlice";
+import { setToggleFlag } from "../features/filteringSlice";
 
 export default function Filtering() {
   const [methodSelected, setMethodSelected] = useState<boolean>(false);
@@ -15,6 +16,7 @@ export default function Filtering() {
   const [originFilterOptions, setOriginFilterOptions] =
     useState<filterOption>();
 
+  const checkedList = useAppSelector((state) => state.filtering.list);
   const dispatch = useAppDispatch();
 
   const setSelected = (
@@ -61,11 +63,14 @@ export default function Filtering() {
       // 초기화된 filtering option list에 원래 값 설정.
       setFilterOptions((prev) => originFilterOptions);
     }
-  }, [filterOptions, originFilterOptions]);
+  }, [filterOptions]);
 
   const handleRefresh = () => {
     //checked filtering list 초기화.
     dispatch(resetCheckedList());
+
+    //toggle 초기화
+    dispatch(setToggleFlag(false));
 
     //SelectBox 초기화.
     setMaterialSelected(false);
@@ -102,7 +107,9 @@ export default function Filtering() {
 
       <FilterContainer>
         <SelectBox onClick={handleMaterialSelectBox}>
-          <span>재료</span>
+          <span>
+            재료 {checkedList.length > 0 ? ` (${checkedList.length})` : ""}
+          </span>
           <ArrowDropDownIcon
             sx={{ color: `${materialSelected ? "#FFFFFF" : "#939FA5"}` }}
           />
@@ -205,6 +212,7 @@ const RefreshContainer = styled.div`
   column-gap: 5px;
   align-items: center;
   margin-left: 8px;
+  cursor: pointer;
 `;
 
 const RefreshText = styled.div`

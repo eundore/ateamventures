@@ -218,6 +218,8 @@ const ViewButton = styled.div`
   font-size: 14px;
   line-height: 20px;
   color: #ffffff;
+
+  cursor: pointer;
 `;
 
 const ChatButton = styled.div`
@@ -236,6 +238,8 @@ const ChatButton = styled.div`
   font-size: 14px;
   line-height: 20px;
   color: #2196f3;
+
+  cursor: pointer;
 `;
 
 const StatusBadge = styled.div`
