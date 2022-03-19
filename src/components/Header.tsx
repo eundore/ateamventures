@@ -45,6 +45,7 @@ export default function Header() {
         <AppBar position="static">
           <Toolbar
             sx={{
+              justifyContent: `${isMobile ? "flex-start" : "space-between"}`,
               backgroundColor: "#1565C0",
               minHeight: `${isMobile ? "44px" : "70px"}`,
               // eslint-disable-next-line no-useless-computed-key
@@ -111,13 +112,6 @@ const Logo = styled.img`
 
 const RightSideContatiner = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px;
-
-  position: absolute;
-  right: 40px;
-  top: 25px;
 `;
 
 const CompanyInfo = styled.div`
@@ -130,6 +124,8 @@ const CompanyInfo = styled.div`
   margin: 0px 16px;
   display: flex;
   align-items: flex-end;
+
+  cursor: pointer;
 `;
 
 const CompanyName = styled.span`
@@ -173,6 +169,8 @@ const Logout = styled.div`
   order: 2;
   flex-grow: 0;
   margin: 0px 16px;
+
+  cursor: pointer;
 `;
 
 const Overlay = styled.div`

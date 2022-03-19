@@ -30,18 +30,17 @@ const Container = styled.div`
 const Wrapper = styled.div`
   position: relative;
   width: 1130.01px;
-  //height: 100vh;
   display: flex;
   flex-direction: column;
   row-gap: 32px;
   margin: 40px;
 
   @media only screen and (max-width: 1422px) {
-    width: 755px;
+    width: 742px;
   }
 
   @media only screen and (max-width: 872px) {
-    width: 400px;
+    width: 320px;
   }
 `;
 

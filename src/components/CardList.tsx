@@ -118,11 +118,7 @@ const NoResultBox = styled.div`
   align-items: center;
   justify-content: center;
 
-  position: absolute;
-  width: 78%;
   height: 100px;
-  left: 155px;
-  top: 198px;
 
   border: 1px solid #c2c2c2;
   box-sizing: border-box;
@@ -135,10 +131,4 @@ const NoResultBox = styled.div`
   line-height: 20px;
 
   color: #939fa5;
-
-  @media only screen and (max-width: 872px) {
-    width: 320px;
-    left: 19px;
-    top: 272px;
-  }
 `;
