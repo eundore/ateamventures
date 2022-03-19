@@ -1,4 +1,8 @@
 export default async function getFilterOptionList() {
-  const response = await fetch("http://localhost:4000/filterOptions");
-  return response;
+  return fetch("http://localhost:4000/filterOptions").then((res) => {
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+    return res.json();
+  });
 }

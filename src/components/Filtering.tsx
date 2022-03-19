@@ -8,8 +8,10 @@ import { filterOption } from "../utils/CommonInterface";
 import { useAppDispatch, useAppSelector } from "../app/hook";
 import { resetCheckedList } from "../features/filteringSlice";
 import { setToggleFlag } from "../features/filteringSlice";
+import { useSnackbar } from "notistack";
 
 export default function Filtering() {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [methodSelected, setMethodSelected] = useState<boolean>(false);
   const [materialSelected, setMaterialSelected] = useState<boolean>(false);
   const [filterOptions, setFilterOptions] = useState<filterOption>();
@@ -52,10 +54,14 @@ export default function Filtering() {
 
   useEffect(() => {
     getFilterOptionList()
-      .then((res) => res.json())
       .then((data) => {
         setFilterOptions((prev) => data);
         setOriginFilterOptions((prev) => data);
+      })
+      .catch((error) => {
+        enqueueSnackbar("필터 옵션 가져오기를 실패했습니다.", {
+          variant: "error",
+        });
       });
   }, []);
 

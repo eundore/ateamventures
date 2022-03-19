@@ -5,9 +5,12 @@ import getEstimateRequestCardList from "../api/getEstimateRequestCardList";
 import { useAppSelector, useAppDispatch } from "../app/hook";
 import { setcardList } from "../features/estimateRequestCardSlice";
 import { EstimateRequestCard } from "../utils/CommonInterface";
+import { useSnackbar } from "notistack";
 
 export default function CardList() {
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   const cardList = useAppSelector((state) => state.estimateRequestCard.list);
   const [originCardList, setOriginCardList] = useState<
     Array<EstimateRequestCard>
@@ -18,10 +21,14 @@ export default function CardList() {
 
   useEffect(() => {
     getEstimateRequestCardList()
-      .then((res) => res.json())
       .then((data) => {
         dispatch(setcardList([...data]));
         setOriginCardList((prev) => [...data]);
+      })
+      .catch((error) => {
+        enqueueSnackbar("견적 요청 카드 목록 가져오기를 실패했습니다.", {
+          variant: "error",
+        });
       });
   }, []);
 
