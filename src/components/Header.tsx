@@ -11,7 +11,7 @@ import MobileHeaderMenu from "./MobileHeaderMenu";
 import { useEffect, useRef, useState } from "react";
 
 export default function Header() {
-  const isMobile = useMediaQuery("(max-width: 845px)");
+  const isMobile = useMediaQuery("(max-width: 872px)");
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -103,7 +103,7 @@ const Logo = styled.img`
   height: 20px;
   width: 153px;
 
-  @media only screen and (max-width: 845px) {
+  @media only screen and (max-width: 872px) {
     height: 12px;
     width: 91.8px;
   }

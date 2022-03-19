@@ -71,7 +71,7 @@ export default function Filtering() {
     dispatch(resetCheckedList());
 
     //toggle 초기화
-    dispatch(setToggleFlag(false));
+    //dispatch(setToggleFlag(false));
 
     //SelectBox 초기화.
     setMaterialSelected(false);
@@ -128,7 +128,7 @@ export default function Filtering() {
         </CheckBoxContainer>
       </FilterContainer>
 
-      {checkedList.length || toggle ? (
+      {checkedList.length ? (
         <RefreshContainer onClick={handleRefresh}>
           <RefreshIcon sx={{ color: "#2196F3" }} />
           <RefreshText>필터링 리셋</RefreshText>
@@ -150,7 +150,11 @@ const Container = styled.div`
   display: flex;
   column-gap: 11px;
 
-  @media only screen and (max-width: 845px) {
+  @media only screen and (max-width: 1422px) {
+    left: 65px;
+  }
+
+  @media only screen and (max-width: 872px) {
     left: 20px;
     top: 156px;
   }
