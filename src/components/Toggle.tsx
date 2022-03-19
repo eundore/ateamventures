@@ -70,11 +70,11 @@ export default function Toggle() {
 }
 
 const Container = styled.div`
-  position: absolute;
-  width: 180px;
-  height: 20px;
-  left: 1106px;
-  top: 140px;
+  // position: absolute;
+  // width: 180px;
+  // height: 20px;
+  // left: 1106px;
+  // top: 140px;
 
   @media only screen and (max-width: 1422px) {
     left: 638px;

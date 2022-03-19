@@ -11,8 +11,10 @@ export default function DashBoard() {
           <Title>들어온 요청</Title>
           <SubTitle>파트너님에게 딱 맞는 요청서를 찾아보세요.</SubTitle>
         </TitleContainer>
-        <Filtering />
-        <Toggle />
+        <FilterContainer>
+          <Filtering />
+          <Toggle />
+        </FilterContainer>
         <CardList />
       </Wrapper>
     </Container>
@@ -22,28 +24,33 @@ export default function DashBoard() {
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  min-width: 400px;
 `;
 
 const Wrapper = styled.div`
   position: relative;
-  width: 1440px;
-  height: 100vh;
+  width: 1130.01px;
+  //height: 100vh;
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+  margin: 40px;
 
   @media only screen and (max-width: 1422px) {
-    width: 940px;
+    width: 755px;
   }
 
   @media only screen and (max-width: 872px) {
-    width: 360px;
+    width: 400px;
   }
 `;
 
 const TitleContainer = styled.div`
-  position: absolute;
-  width: 284px;
-  height: 56px;
-  left: 155px;
-  top: 46px;
+  // position: absolute;
+  // width: 284px;
+  // height: 56px;
+  // left: 155px;
+  // top: 46px;
 
   @media only screen and (max-width: 1422px) {
     left: 65px;
@@ -73,4 +80,13 @@ const SubTitle = styled.div`
   font-size: 16px;
   line-height: 24px;
   color: #323d45;
+`;
+
+const FilterContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 872px) {
+    flex-direction: column;
+    row-gap: 20px;
 `;

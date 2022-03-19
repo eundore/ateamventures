@@ -141,11 +141,11 @@ export default function Filtering() {
 }
 
 const Container = styled.div`
-  position: absolute;
-  width: 311px;
-  height: 32px;
-  left: 155px;
-  top: 134px;
+  // position: absolute;
+  // width: 311px;
+  // height: 32px;
+  // left: 155px;
+  // top: 134px;
 
   display: flex;
   column-gap: 11px;

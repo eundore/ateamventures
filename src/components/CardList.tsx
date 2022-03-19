@@ -86,11 +86,11 @@ const CardsWrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 10px;
   column-gap: 10px;
-  position: absolute;
-  //width: 78.5%;
+  //position: absolute;
+  width: 1130.01px
   //height: 728px;
-  left: 155px;
-  top: 198px;
+  //left: 155px;
+  //top: 198px;
   justify-content: center;
 
   @media only screen and (max-width: 1422px) {

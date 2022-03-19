@@ -49,7 +49,7 @@ export default function Header() {
               minHeight: `${isMobile ? "44px" : "70px"}`,
               // eslint-disable-next-line no-useless-computed-key
               ["@media (min-width:600px)"]: {
-                height: "70px",
+                minHeight: `${isMobile ? "44px" : "70px"}`,
               },
             }}
           >
