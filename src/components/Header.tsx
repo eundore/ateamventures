@@ -9,8 +9,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import MobileHeaderMenu from "./MobileHeaderMenu";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function Header() {
+  const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 872px)");
 
   const [open, setOpen] = useState<boolean>(false);
@@ -69,7 +71,7 @@ export default function Header() {
               ""
             )}
 
-            <Logo src={logo} />
+            <Logo src={logo} onClick={() => navigate(0)} />
             {isMobile ? (
               ""
             ) : (
@@ -108,6 +110,8 @@ const Logo = styled.img`
     height: 12px;
     width: 91.8px;
   }
+
+  cursor: pointer;
 `;
 
 const RightSideContatiner = styled.div`

@@ -17,6 +17,9 @@ const mobileHeaderMenuStyles = makeStyles({
     fontSize: "14px",
     lineHeight: "20px",
     color: "#323D45",
+    "& .MuiTypography-root": {
+      fontWeight: "500",
+    },
   },
 });
 
