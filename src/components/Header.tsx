@@ -11,29 +11,46 @@ import MobileHeaderMenu from "./MobileHeaderMenu";
 import { useEffect, useRef, useState } from "react";
 
 export default function Header() {
-  const isMobile = useMediaQuery("(max-width: 600px)");
+  const isMobile = useMediaQuery("(max-width: 845px)");
 
   const [open, setOpen] = useState<boolean>(false);
-  const target = useRef<HTMLElement>(null);
 
-  const handleHeaderMenu = () => {
-    setOpen(true);
+  const target = useRef<HTMLDivElement>(null);
+
+  const handleSideMenu = () => {
     document.body.style.overflow = "hidden";
+    document.addEventListener("mousedown", handleOutsideClick);
+    setOpen(true);
   };
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (!target.current?.childNodes[0].contains(event.target as Element)) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!open) {
+      document.body.style.overflow = "auto";
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+  }, [open]);
 
   return (
     <>
       <Box
         sx={{
           flexGrow: 1,
-          minWidth: `${isMobile ? "0px" : "1300px"}`,
-          minHeight: `${isMobile ? "44px" : "70px"}`,
         }}
       >
         <AppBar position="static">
           <Toolbar
             sx={{
               backgroundColor: "#1565C0",
+              minHeight: `${isMobile ? "44px" : "70px"}`,
+              // eslint-disable-next-line no-useless-computed-key
+              ["@media (min-width:600px)"]: {
+                height: "70px",
+              },
             }}
           >
             {isMobile ? (
@@ -43,7 +60,7 @@ export default function Header() {
                 color="inherit"
                 aria-label="menu"
                 sx={{ mr: 2 }}
-                onClick={handleHeaderMenu}
+                onClick={handleSideMenu}
               >
                 <MenuIcon />
               </IconButton>
@@ -68,10 +85,12 @@ export default function Header() {
         </AppBar>
       </Box>
 
-      {open ? (
+      {isMobile && open ? (
         <>
           <Overlay />
-          <MobileHeaderMenu checked={open} />
+          <div ref={target}>
+            <MobileHeaderMenu checked={open} />
+          </div>
         </>
       ) : (
         ""
@@ -84,7 +103,7 @@ const Logo = styled.img`
   height: 20px;
   width: 153px;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 845px) {
     height: 12px;
     width: 91.8px;
   }

@@ -66,7 +66,7 @@ const Container = styled.div`
     border: 2px solid rgba(33, 150, 243, 1);
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 845px) {
     width: 320px;
     height: 344px;
     row-gap: 16px;
@@ -137,7 +137,7 @@ const Divider = styled.div`
   border: 1px solid #e5e5e5;
   margin-top: 16px;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 845px) {
     width: 288px;
   }
 `;
@@ -196,7 +196,7 @@ const ButtonsContainer = styled.div`
   flex-direction: row;
   column-gap: 10px;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 845px) {
     margin-top: 16px;
   }
 `;

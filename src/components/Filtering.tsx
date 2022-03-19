@@ -150,7 +150,7 @@ const Container = styled.div`
   display: flex;
   column-gap: 11px;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 845px) {
     left: 20px;
     top: 156px;
   }

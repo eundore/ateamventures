@@ -82,15 +82,24 @@ export default function CardList() {
 
 const CardsWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(366px, auto));
   row-gap: 10px;
+  column-gap: 10px;
   position: absolute;
-  width: 1130.01px;
-  height: 728px;
+  width: 78.5%;
+  //height: 728px;
   left: 155px;
   top: 198px;
+  justify-content: center;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 845px) {
+    width: 320px;
+    left: 20px;
+    top: 260px;
+    grid-template-columns: 1fr;
+  }
+
+  @media only screen and (max-width: 845px) {
     width: 320px;
     left: 20px;
     top: 260px;
@@ -104,7 +113,7 @@ const NoResultBox = styled.div`
   justify-content: center;
 
   position: absolute;
-  width: 1130px;
+  width: 78%;
   height: 100px;
   left: 155px;
   top: 198px;
@@ -121,7 +130,7 @@ const NoResultBox = styled.div`
 
   color: #939fa5;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 845px) {
     width: 320px;
     left: 19px;
     top: 272px;

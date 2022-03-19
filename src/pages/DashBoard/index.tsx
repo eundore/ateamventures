@@ -29,7 +29,7 @@ const Wrapper = styled.div`
   width: 1440px;
   height: 100vh;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 845px) {
     width: 360px;
   }
 `;
@@ -41,7 +41,7 @@ const TitleContainer = styled.div`
   left: 155px;
   top: 46px;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 845px) {
     left: 20px;
     top: 68px;
   }

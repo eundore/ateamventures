@@ -1,4 +1,4 @@
-import { makeStyles, createStyles } from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 import {
   Slide,
   Divider,
@@ -10,46 +10,23 @@ import {
 import BusinessIcon from "@mui/icons-material/Business";
 import styled from "styled-components";
 import logoMobileMenu from "../assets/logoMobileMenu.png";
-import { useEffect, useRef } from "react";
 
-const menuItemStyles = makeStyles(() =>
-  createStyles({
-    text: {
-      fontFamily: "Noto Sans KR Medium",
-      fontSize: "14px",
-      lineHeight: "20px",
-      color: "#323D45",
-    },
-  })
-);
+const mobileHeaderMenuStyles = makeStyles({
+  text: {
+    fontFamily: "Noto Sans KR Medium",
+    fontSize: "14px",
+    lineHeight: "20px",
+    color: "#323D45",
+  },
+});
 
 export default function MobileHeaderMenu(props: { checked: boolean }) {
   const { checked } = props;
-  const classes = menuItemStyles();
-
-  const target = useRef<HTMLDivElement>(null);
-
-  const handleOutsideClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent
-  ) => {
-    if (event.target === target.current) {
-    }
-    // if (!target.current || target.current.contains(event.target)) {
-    //   return;
-    // }
-  };
-
-  useEffect(() => {
-    if (checked) {
-      document.addEventListener("click", handleOutsideClick);
-    } else {
-      document.removeEventListener("click", handleOutsideClick);
-    }
-  }, [checked]);
+  const classes = mobileHeaderMenuStyles();
 
   return (
     <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
-      <Container ref={target}>
+      <Container>
         <Title>
           <Logo src={logoMobileMenu} />
         </Title>
