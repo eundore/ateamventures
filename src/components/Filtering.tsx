@@ -52,7 +52,8 @@ export default function Filtering() {
       document.querySelectorAll(".selected").forEach((item) => {
         item.classList.remove("selected");
       });
-      document.removeEventListener("mousedown", handleOutsideClick);
+
+      document.addEventListener("click", handleOutsideClick, true);
     }
   }, [materialSelected, methodSelected]);
 
@@ -69,7 +70,7 @@ export default function Filtering() {
     setSelected(event, newState);
     setMethodSelected(newState);
 
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("click", handleOutsideClick, true);
   };
 
   const handleMaterialSelectBox = (event: React.MouseEvent<HTMLElement>) => {

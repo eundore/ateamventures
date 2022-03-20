@@ -21,7 +21,7 @@ export default function Header() {
 
   const handleSideMenu = () => {
     document.body.style.overflow = "hidden";
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("click", handleOutsideClick, true);
     setOpen(true);
   };
 
@@ -34,7 +34,7 @@ export default function Header() {
   useEffect(() => {
     if (!open) {
       document.body.style.overflow = "auto";
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("click", handleOutsideClick, true);
     }
   }, [open]);
 
