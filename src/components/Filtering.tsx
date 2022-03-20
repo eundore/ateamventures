@@ -2,13 +2,14 @@ import styled from "styled-components";
 import CheckBoxList from "./CheckBoxList";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import getFilterOptionList from "../api/getFilterOptionList";
 import { filterOption } from "../utils/CommonInterface";
 import { useAppDispatch, useAppSelector } from "../app/hook";
 import { resetCheckedList } from "../features/filteringSlice";
 import { setToggleFlag } from "../features/filteringSlice";
 import { useSnackbar } from "notistack";
+import {} from "../utils/CommonType";
 
 export default function Filtering() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -18,7 +19,18 @@ export default function Filtering() {
   const [originFilterOptions, setOriginFilterOptions] =
     useState<filterOption>();
 
+  const target = useRef<HTMLDivElement>(null);
+
   const checkedList = useAppSelector((state) => state.filtering.list);
+  const [materialCheckedList, setMaterialCheckedList] = useState<Array<string>>(
+    []
+  );
+
+  const materialType = [""];
+  useEffect(() => {
+    const newLisd = checkedList.filter((data) => data);
+  }, [checkedList]);
+
   const toggle = useAppSelector((state) => state.filtering.toggle);
   const dispatch = useAppDispatch();
 
@@ -26,11 +38,8 @@ export default function Filtering() {
     event: React.MouseEvent<HTMLElement>,
     newState: boolean
   ) => {
-    let el = document.querySelector(".selected");
+    document.querySelector(".selected")?.classList.remove("selected");
 
-    if (el !== null) {
-      el.classList.remove("selected");
-    }
     if (newState) {
       event.currentTarget.classList.add("selected");
     } else {
@@ -38,11 +47,29 @@ export default function Filtering() {
     }
   };
 
+  useEffect(() => {
+    if (!materialSelected && !methodSelected) {
+      document.querySelectorAll(".selected").forEach((item) => {
+        item.classList.remove("selected");
+      });
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+  }, [materialSelected, methodSelected]);
+
+  const handleOutsideClick = useCallback((event: MouseEvent) => {
+    if (!target.current?.contains(event.target as Element)) {
+      setMaterialSelected(false);
+      setMethodSelected(false);
+    }
+  }, []);
+
   const handleMethodSelectBox = (event: React.MouseEvent<HTMLElement>) => {
     setMaterialSelected(false);
     const newState = !methodSelected;
     setSelected(event, newState);
     setMethodSelected(newState);
+
+    document.addEventListener("mousedown", handleOutsideClick);
   };
 
   const handleMaterialSelectBox = (event: React.MouseEvent<HTMLElement>) => {
@@ -50,6 +77,8 @@ export default function Filtering() {
     const newState = !materialSelected;
     setSelected(event, newState);
     setMaterialSelected(newState);
+
+    document.addEventListener("mousedown", handleOutsideClick);
   };
 
   useEffect(() => {
@@ -72,6 +101,12 @@ export default function Filtering() {
     }
   }, [filterOptions]);
 
+  useEffect(() => {
+    const materialList = originFilterOptions?.material;
+    const newList = checkedList.filter((data) => materialList?.includes(data));
+    setMaterialCheckedList((prev) => newList);
+  }, [checkedList]);
+
   const handleRefresh = () => {
     //checked filtering list 초기화.
     dispatch(resetCheckedList());
@@ -85,54 +120,56 @@ export default function Filtering() {
 
     // filtering option list 초기화.
     setFilterOptions((prev) => undefined);
-    document.querySelectorAll(".selected").forEach((item) => {
-      item.classList.remove("selected");
-    });
   };
 
   return (
     <Container>
-      <FilterContainer>
-        <SelectBox onClick={handleMethodSelectBox}>
-          <span>가공방식</span>
-          <ArrowDropDownIcon
-            sx={{ color: `${methodSelected ? "#FFFFFF" : "#939FA5"}` }}
-          />
-        </SelectBox>
-        <CheckBoxContainer
-          style={{
-            display: `${methodSelected ? "block" : "none"}`,
-          }}
-        >
-          <CheckBoxList
-            optionList={
-              filterOptions !== undefined ? filterOptions.processMethod : []
-            }
-          />
-        </CheckBoxContainer>
-      </FilterContainer>
+      <FilterGroup ref={target}>
+        <FilterContainer>
+          <SelectBox onClick={handleMethodSelectBox}>
+            <span>가공방식</span>
+            <ArrowDropDownIcon
+              sx={{ color: `${methodSelected ? "#FFFFFF" : "#939FA5"}` }}
+            />
+          </SelectBox>
+          <CheckBoxContainer
+            style={{
+              display: `${methodSelected ? "block" : "none"}`,
+            }}
+          >
+            <CheckBoxList
+              optionList={
+                filterOptions !== undefined ? filterOptions.processMethod : []
+              }
+            />
+          </CheckBoxContainer>
+        </FilterContainer>
 
-      <FilterContainer>
-        <SelectBox onClick={handleMaterialSelectBox}>
-          <span>
-            재료 {checkedList.length > 0 ? ` (${checkedList.length})` : ""}
-          </span>
-          <ArrowDropDownIcon
-            sx={{ color: `${materialSelected ? "#FFFFFF" : "#939FA5"}` }}
-          />
-        </SelectBox>
-        <CheckBoxContainer
-          style={{
-            display: `${materialSelected ? "block" : "none"}`,
-          }}
-        >
-          <CheckBoxList
-            optionList={
-              filterOptions !== undefined ? filterOptions.material : []
-            }
-          />
-        </CheckBoxContainer>
-      </FilterContainer>
+        <FilterContainer>
+          <SelectBox onClick={handleMaterialSelectBox}>
+            <span>
+              재료{" "}
+              {materialCheckedList.length > 0
+                ? ` (${materialCheckedList.length})`
+                : ""}
+            </span>
+            <ArrowDropDownIcon
+              sx={{ color: `${materialSelected ? "#FFFFFF" : "#939FA5"}` }}
+            />
+          </SelectBox>
+          <CheckBoxContainer
+            style={{
+              display: `${materialSelected ? "block" : "none"}`,
+            }}
+          >
+            <CheckBoxList
+              optionList={
+                filterOptions !== undefined ? filterOptions.material : []
+              }
+            />
+          </CheckBoxContainer>
+        </FilterContainer>
+      </FilterGroup>
 
       {checkedList.length ? (
         <RefreshContainer onClick={handleRefresh}>
@@ -147,12 +184,6 @@ export default function Filtering() {
 }
 
 const Container = styled.div`
-  // position: absolute;
-  // width: 311px;
-  // height: 32px;
-  // left: 155px;
-  // top: 134px;
-
   display: flex;
   column-gap: 11px;
 
@@ -164,6 +195,11 @@ const Container = styled.div`
     left: 20px;
     top: 156px;
   }
+`;
+
+const FilterGroup = styled.div`
+  display: flex;
+  column-gap: 11px;
 `;
 
 const FilterContainer = styled.div`

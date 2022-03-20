@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import MobileHeaderMenu from "./MobileHeaderMenu";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function Header() {
@@ -24,11 +24,12 @@ export default function Header() {
     document.addEventListener("mousedown", handleOutsideClick);
     setOpen(true);
   };
-  const handleOutsideClick = (event: MouseEvent) => {
+
+  const handleOutsideClick = useCallback((event: MouseEvent) => {
     if (!target.current?.childNodes[0].contains(event.target as Element)) {
       setOpen(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (!open) {

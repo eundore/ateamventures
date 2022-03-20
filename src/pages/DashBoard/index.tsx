@@ -44,22 +44,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const TitleContainer = styled.div`
-  // position: absolute;
-  // width: 284px;
-  // height: 56px;
-  // left: 155px;
-  // top: 46px;
-
-  @media only screen and (max-width: 1422px) {
-    left: 65px;
-  }
-
-  @media only screen and (max-width: 872px) {
-    left: 20px;
-    top: 68px;
-  }
-`;
+const TitleContainer = styled.div``;
 const Title = styled.div`
   width: 97px;
   height: 32px;

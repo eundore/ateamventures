@@ -89,26 +89,18 @@ export default function CardList() {
 
 const CardsWrapper = styled.div`
   display: grid;
-  //grid-template-columns: repeat(auto-fit, minmax(366px, auto));
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 10px;
   column-gap: 10px;
-  //position: absolute;
   width: 1130.01px
-  //height: 728px;
-  //left: 155px;
-  //top: 198px;
   justify-content: center;
 
   @media only screen and (max-width: 1422px) {
     grid-template-columns: 1fr 1fr;
-    left: 65px;
   }
 
   @media only screen and (max-width: 872px) {
     width: 320px;
-    left: 20px;
-    top: 260px;
     grid-template-columns: 1fr;
   }
 `;

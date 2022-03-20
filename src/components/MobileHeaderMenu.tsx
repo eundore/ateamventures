@@ -34,7 +34,11 @@ export default function MobileHeaderMenu(props: { checked: boolean }) {
           <Logo src={logoMobileMenu} />
         </Title>
         <Divider />
-        <MenuList>
+        <MenuList
+          sx={{
+            padding: "30px 15px",
+          }}
+        >
           <MenuItem>
             <ListItemIcon>
               <BusinessIcon fontSize="small" />
